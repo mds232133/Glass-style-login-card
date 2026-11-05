@@ -1,0 +1,241 @@
+.tunnel {
+  --tunnel-size: min(91vw, 820px, 112vh);
+  position: absolute;
+  z-index: -2;
+  top: 45%;
+  left: 50%;
+  width: var(--tunnel-size);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  filter: drop-shadow(0 0 28px rgba(0, 110, 255, .4));
+  transition: filter 1.2s ease, transform 1.2s ease;
+}
+
+.tunnel.is-active {
+  filter: drop-shadow(0 0 42px rgba(0, 156, 255, .65)) drop-shadow(0 0 65px rgba(115, 32, 255, .27));
+  transform: translate(-50%, -50%) scale(1.035);
+}
+
+.tunnel-halo,
+.portal-ring,
+.portal-core,
+.portal-rim,
+.tunnel-stars {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+}
+
+.tunnel-halo {
+  inset: 2%;
+  background:
+    radial-gradient(circle, transparent 33%, rgba(0, 82, 255, .13) 37%, transparent 42%),
+    radial-gradient(circle, transparent 49%, rgba(20, 203, 255, .2) 53%, transparent 57%),
+    radial-gradient(circle, transparent 67%, rgba(112, 28, 255, .17) 69%, transparent 74%);
+  filter: blur(15px);
+  animation: haloPulse 4.5s ease-in-out infinite;
+}
+
+.portal-ring {
+  border: 1px solid transparent;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.ring-outer {
+  inset: 2%;
+  border-width: 10px;
+  border-color: rgba(15, 163, 255, .56);
+  border-left-color: transparent;
+  border-bottom-color: rgba(22, 89, 255, .7);
+  box-shadow: inset 0 0 12px #008dff, 0 0 16px #057cff, 0 0 42px rgba(0, 164, 255, .6);
+  mask-image: conic-gradient(from 25deg, transparent 0 10deg, #000 19deg 88deg, transparent 103deg 145deg, #000 158deg 277deg, transparent 290deg);
+  animation: spin 19s linear infinite;
+}
+
+.ring-outer-dashes {
+  inset: 8%;
+  border-width: 3px;
+  border-color: rgba(21, 107, 255, .8);
+  box-shadow: 0 0 13px rgba(0, 116, 255, .7);
+  mask-image: repeating-conic-gradient(from 0deg, #000 0 13deg, transparent 13deg 17deg);
+  animation: spinReverse 27s linear infinite;
+}
+
+.ring-violet {
+  inset: 14%;
+  border-width: 7px;
+  border-color: rgba(147, 39, 255, .88);
+  border-top-color: transparent;
+  border-right-color: rgba(201, 49, 255, .7);
+  box-shadow: inset 0 0 12px rgba(167, 32, 255, .9), 0 0 20px rgba(161, 41, 255, .85);
+  mask-image: conic-gradient(from 210deg, #000 0 77deg, transparent 95deg 127deg, #000 140deg 259deg, transparent 273deg);
+  animation: spinReverse 15s linear infinite;
+}
+
+.ring-cyan {
+  inset: 20%;
+  border-width: 5px;
+  border-color: rgba(0, 213, 255, .9);
+  border-left-color: transparent;
+  box-shadow: inset 0 0 10px #00aaff, 0 0 18px #00bfff;
+  mask-image: repeating-conic-gradient(from 12deg, #000 0 61deg, transparent 61deg 68deg);
+  animation: spin 11s linear infinite;
+}
+
+.ring-inner {
+  inset: 27%;
+  border-width: 2px;
+  border-color: rgba(51, 125, 255, .9);
+  box-shadow: 0 0 11px #1675ff, inset 0 0 25px rgba(20, 54, 255, .64);
+  animation: spinReverse 8s linear infinite;
+}
+
+.ring-core {
+  inset: 34%;
+  border-width: 2px;
+  border-color: rgba(55, 203, 255, .85);
+  box-shadow: 0 0 17px #05bfff, inset 0 0 32px rgba(0, 99, 255, .9);
+  animation: corePulse 3s ease-in-out infinite, spin 23s linear infinite;
+}
+
+.portal-core {
+  inset: 39%;
+  background:
+    radial-gradient(circle at 50% 43%, rgba(0, 128, 255, .35), transparent 58%),
+    radial-gradient(circle, #010619 10%, #031040 58%, rgba(7, 26, 91, .25) 76%, transparent 100%);
+  box-shadow: inset 0 0 47px rgba(0, 18, 83, .95), 0 0 34px rgba(0, 134, 255, .38);
+}
+
+.portal-rim {
+  inset: 3%;
+  border: 1px solid rgba(104, 221, 255, .48);
+  box-shadow: inset 0 0 40px rgba(0, 130, 255, .18), 0 0 9px rgba(0, 201, 255, .55);
+  transform: rotateX(calc(5deg + var(--pointer-y, 0deg))) rotateY(calc(-7deg + var(--pointer-x, 0deg)));
+}
+
+.tunnel-stars {
+  inset: 8%;
+  background-image:
+    radial-gradient(1.5px 1.5px at 18% 24%, #c4faff 95%, transparent),
+    radial-gradient(2px 2px at 72% 17%, #04c9ff 95%, transparent),
+    radial-gradient(1px 1px at 82% 61%, #fff 95%, transparent),
+    radial-gradient(2px 2px at 31% 78%, #c04dff 95%, transparent),
+    radial-gradient(1px 1px at 57% 31%, #9decff 95%, transparent),
+    radial-gradient(1.5px 1.5px at 12% 65%, #3f8dff 95%, transparent),
+    radial-gradient(1px 1px at 61% 88%, #fff 95%, transparent);
+  background-size: 240px 220px;
+  opacity: .65;
+  animation: starDrift 24s linear infinite;
+}
+
+.star-point {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #d6fbff;
+  box-shadow: 0 0 7px 2px #18caff, 0 0 15px #357aff;
+  animation: starTwinkle 2.8s ease-in-out var(--twinkle-delay, 0s) infinite alternate;
+}
+
+.tunnel.is-active .ring-outer,
+.tunnel.is-active .ring-outer-dashes,
+.tunnel.is-active .ring-violet,
+.tunnel.is-active .ring-cyan,
+.tunnel.is-active .ring-inner,
+.tunnel.is-active .ring-core {
+  filter: brightness(1.45);
+}
+
+.horizon {
+  position: absolute;
+  z-index: -1;
+  top: 76%;
+  left: -12%;
+  width: 124%;
+  height: 17%;
+  border-top: 2px solid rgba(0, 145, 255, .65);
+  border-radius: 50% 50% 0 0;
+  box-shadow: 0 -7px 23px rgba(0, 151, 255, .3);
+  transform: perspective(350px) rotateX(14deg);
+}
+
+.floor {
+  position: absolute;
+  z-index: -1;
+  top: 77%;
+  left: 50%;
+  width: min(116vw, 1540px);
+  height: 39%;
+  transform: translateX(-50%) perspective(330px) rotateX(62deg);
+  transform-origin: top center;
+  border-radius: 50%;
+  border: 2px solid rgba(0, 137, 255, .65);
+  box-shadow: 0 0 22px rgba(0, 128, 255, .45), inset 0 0 22px rgba(0, 97, 255, .28);
+  background: radial-gradient(ellipse, rgba(10, 48, 145, .2), rgba(0, 7, 25, .75) 70%);
+}
+
+.floor i {
+  position: absolute;
+  inset: 8% 8%;
+  border: 1px solid rgba(36, 142, 255, .55);
+  border-radius: 50%;
+  box-shadow: 0 0 11px rgba(0, 180, 255, .3);
+}
+
+.floor i:nth-child(2) { inset: 17% 16%; border-color: rgba(151, 50, 255, .72); }
+.floor i:nth-child(3) { inset: 27% 26%; border-color: rgba(0, 193, 255, .7); }
+.floor i:nth-child(4) { inset: 38% 36%; border-color: rgba(66, 94, 255, .65); }
+
+.ambient-particles {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  width: var(--particle-size, 2px);
+  height: var(--particle-size, 2px);
+  border-radius: 50%;
+  background: #8ceeff;
+  box-shadow: 0 0 8px 2px rgba(0, 184, 255, .7);
+  opacity: 0;
+  animation: floatParticle var(--particle-time, 5s) ease-in-out var(--particle-delay, 0s) infinite;
+}
+
+.scene.is-active .particle {
+  opacity: .8;
+}
+
+@keyframes spin { to { transform: rotateZ(360deg); } }
+@keyframes spinReverse { to { transform: rotateZ(-360deg); } }
+@keyframes haloPulse { 50% { opacity: .68; transform: scale(1.045); } }
+@keyframes corePulse { 50% { opacity: .68; filter: brightness(1.4); } }
+@keyframes starDrift { to { transform: rotateZ(360deg) scale(1.04); } }
+@keyframes starTwinkle { from { opacity: .25; transform: scale(.65); } to { opacity: 1; transform: scale(1.4); } }
+@keyframes floatParticle {
+  0% { transform: translate3d(0, 24px, 0) scale(.5); opacity: 0; }
+  20% { opacity: .85; }
+  80% { opacity: .7; }
+  100% { transform: translate3d(var(--particle-drift, 18px), -80px, 0) scale(1.3); opacity: 0; }
+}
+
+@media (max-width: 700px) {
+  .tunnel { --tunnel-size: min(115vw, 760px); top: 47%; }
+  .ring-outer { border-width: 7px; }
+  .floor { top: 78%; height: 35%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portal-ring,
+  .tunnel-stars,
+  .tunnel-halo,
+  .particle {
+    animation-duration: 30s !important;
+  }
+}

@@ -1,0 +1,51 @@
+.scene.is-activating .tunnel {
+  animation: portalSurge .9s cubic-bezier(.2, .8, .2, 1) both;
+}
+
+.scene.is-active .tunnel {
+  animation: activePortal 3.8s ease-in-out infinite;
+}
+
+.login-card.is-floating .profile-icon {
+  animation: avatarGlow 3.8s ease-in-out infinite;
+}
+
+@keyframes portalSurge {
+  0% { filter: brightness(.8) drop-shadow(0 0 25px rgba(0, 110, 255, .3)); }
+  55% { filter: brightness(1.7) drop-shadow(0 0 64px rgba(0, 183, 255, .9)); }
+  100% { filter: brightness(1.25) drop-shadow(0 0 42px rgba(0, 156, 255, .65)); }
+}
+
+@keyframes activePortal {
+  0%, 100% { filter: brightness(1.12) drop-shadow(0 0 42px rgba(0, 156, 255, .58)); }
+  50% { filter: brightness(1.36) drop-shadow(0 0 54px rgba(110, 35, 255, .55)); }
+}
+
+@keyframes avatarGlow {
+  50% { box-shadow: 0 0 13px #0bdcff, 0 0 29px rgba(0, 114, 255, .95), inset 0 0 20px rgba(0, 220, 255, .78); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .boot-card.is-retreating {
+    transform: perspective(1200px) translate3d(0, 0, -760px) scale(.12) rotateX(5deg);
+  }
+
+  .login-card:not(.is-emerging) {
+    transform: translate3d(0, 0, -500px) scale(.16);
+  }
+
+  .staged-item:not(.is-arrived) {
+    transform: perspective(1200px) translate3d(0, 10px, -420px) scale(.48);
+  }
+
+  .login-card.is-emerging {
+    animation: none;
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  .login-card.is-floating,
+  .login-card.is-floating .profile-icon {
+    animation: none;
+  }
+}
